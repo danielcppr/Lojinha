@@ -1,0 +1,19 @@
+.full-width-table {
+  width: 100%;
+}
+
+.mat-column-id{
+  width: 6%;
+}
+.mat-column-opcoes {
+  width: 7%;
+}
+
+.opcoes-btn {
+  margin: 3%;
+}
+
+.mensagem-sucesso {
+  padding-left: 2%;
+  font-weight: 500;
+}
