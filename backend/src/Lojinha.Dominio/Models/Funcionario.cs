@@ -23,6 +23,6 @@ namespace Lojinha.Dominio.Models
         public string Telefone { get; set; }
         public string Cpf { get; set; }
         public double SalarioBase { get; set; }
-        public IEnumerable<Venda> Vendas { get; set; }
+        public virtual IEnumerable<Venda> Vendas { get; set; }
     }
 }

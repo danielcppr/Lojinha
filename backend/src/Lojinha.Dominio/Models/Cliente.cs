@@ -28,5 +28,7 @@ namespace Lojinha.Dominio.Models
         [StringLength(11, MinimumLength = 11)]
         [ValidacaoCliente]
         public string Cpf { get; set; }
+
+        //public List<ItemVenda> ItemVendas { get; set; }
     }
 }

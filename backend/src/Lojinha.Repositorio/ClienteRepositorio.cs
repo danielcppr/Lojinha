@@ -35,7 +35,7 @@ namespace Lojinha.Repositorio
             return cliente;
         }
 
-        public async Task<Cliente[]> GetClientesPorNome(string nome)
+        public async Task<Cliente[]> GetClientesPorNomeAsync(string nome)
         {
             IQueryable<Cliente> query = _context.Clientes
                 .Where(c => c.Nome.Contains(nome))

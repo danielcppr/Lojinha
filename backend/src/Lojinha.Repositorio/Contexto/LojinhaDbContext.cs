@@ -32,12 +32,20 @@ namespace Lojinha.Repositorio.Contexto
                 .IsUnique();
 
             mb.Entity<ItemVenda>()
-                .HasOne(iv => iv.Produto)
+                .HasOne(i => i.Produto)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            //mb.Entity<ItemVenda>()
+            //    .Property(nameof(ItemVenda.ValorTotal))
+            //    .HasComputedColumnSql("getutcdate()");
+
+
+            //mb.HasDbFunction(typeof(LojinhaDbContext).GetMethod(nameof(CalculaValorTotal)))
+            //            .HasName("CalculaTotal");
         }
 
-
+        //public double CalculaValorTotal() => throw new NotSupportedException();
 
     }
 }
