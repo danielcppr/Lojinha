@@ -37,6 +37,11 @@ namespace Lojinha.Repositorio.Contexto
                 .OnDelete(DeleteBehavior.Restrict);
 
             //mb.Entity<ItemVenda>()
+            //    .HasOne(i => i.Venda)
+            //    .WithMany()
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //mb.Entity<ItemVenda>()
             //    .Property(nameof(ItemVenda.ValorTotal))
             //    .HasComputedColumnSql("getutcdate()");
 

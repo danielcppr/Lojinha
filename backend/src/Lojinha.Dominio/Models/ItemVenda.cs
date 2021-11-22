@@ -16,10 +16,16 @@ namespace Lojinha.Dominio.Models
 
         public double ValorParcial { get; set; }
 
+
+        public int ProdutoCodigo { get; set; }
+
         [Required]
         [JsonInclude]
-        public virtual Produto Produto { get; set; }
+        [ForeignKey("ProdutoCodigo")]
+        public Produto Produto { get; set; }
 
+        [ForeignKey("VendaId")]
+        public int VendaId { get; set; }
         [Required]
         [JsonIgnore]
         public virtual Venda Venda { get; set; }

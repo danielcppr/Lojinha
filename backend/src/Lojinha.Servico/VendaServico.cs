@@ -24,13 +24,14 @@ namespace Lojinha.Servico
             _genericoRepo = genericoRepo;
             _mapper = mapper;
         }
+
         public async Task<bool> AdicionarVenda(VendaDto venda)
         {
             try
             {
                 var vendaMapped = _mapper.Map<Venda>(venda);
 
-                vendaMapped.ValorTotal = CalculoVendaService.CalculaValorTotal(vendaMapped);
+                //vendaMapped.ValorTotal = CalculoVendaService.CalculaValorTotal(vendaMapped);
 
                 _genericoRepo.Add(vendaMapped);
 
@@ -49,17 +50,10 @@ namespace Lojinha.Servico
             {
                 var vendas = await _vendaRepo.GetTodasVendas();
 
-
                 if (vendas != null)
                 {
-                    vendas.ToList().ForEach(v =>
-                        {
-                            v.ValorTotal = CalculoVendaService.CalculaValorTotal(v);
-                            _genericoRepo.Update(v);
-                            _genericoRepo.SaveChangesAsync(); 
-                        });
-
                     var vendaMapped = _mapper.Map<VendaDto[]>(vendas);
+                    
                     return vendaMapped;
                 }
                 else return null;
@@ -141,7 +135,7 @@ namespace Lojinha.Servico
                     var itemVendaMapped = _mapper.Map<ItemVenda>(itemVenda);
                     
                     venda.ItensVenda.Add(itemVendaMapped);
-                    venda.ValorTotal = CalculoVendaService.CalculaValorTotal(venda);
+                    //venda.ValorTotal = CalculoVendaService.CalculaValorTotal(venda);
                     _genericoRepo.Update(venda);
                     
                     return await _genericoRepo.SaveChangesAsync() ? true : throw new Exception("Houve algum erro ao realizar a venda.");
@@ -153,6 +147,38 @@ namespace Lojinha.Servico
             catch (Exception e)
             {
 
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task<bool> AtualizaVenda(int vendaId, VendaDto model)
+        {
+            try
+            {
+                var venda = await _vendaRepo.GetVendaPorId(vendaId);
+                if (venda == null) return false;
+
+                else
+                {
+                    var id = venda.VendaId;
+                    var vendaMapped = _mapper.Map(model, venda);
+
+                    vendaMapped.VendaId = id;
+                    
+                    
+                    _genericoRepo.Update(vendaMapped);
+
+                    if (await _genericoRepo.SaveChangesAsync())
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+
+            }
+            catch (Exception e)
+            {
                 throw new Exception(e.Message);
             }
         }

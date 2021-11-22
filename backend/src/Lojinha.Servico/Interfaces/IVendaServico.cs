@@ -15,5 +15,6 @@ namespace Lojinha.Servico.Interfaces
         public Task<VendaDto> GetVendaPorId(int id);
         public Task<bool> AdicionarVenda(VendaDto venda);
         public Task<bool> AdicionarItemVenda(int vendaId, ItemVendaDto itemVenda);
+        public Task<bool> AtualizaVenda(int vendaId, VendaDto venda);
     }
 }

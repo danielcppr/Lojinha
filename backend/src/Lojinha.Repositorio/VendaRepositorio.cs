@@ -22,13 +22,17 @@ namespace Lojinha.Repositorio
         {
             return await _context.Vendas
                                  .Include(v => v.Cliente)
-                                 .Include(v => v.ItensVenda).ThenInclude(i => i.Produto)
+                                 .Include(v => v.Funcionario)
+                                 .Include(v => v.ItensVenda)
                                  .ToArrayAsync();
         }
 
         public async Task<Venda> GetVendaPorId(int id)
         {
-            return await _context.Vendas.FindAsync(id);
+            return await _context.Vendas
+                                 .Include(v => v.ItensVenda)
+                                 .Where(v => v.VendaId == id)
+                                 .FirstOrDefaultAsync();
         }
 
         public async Task<Venda[]> GetVendasPorIdCliente(int id)

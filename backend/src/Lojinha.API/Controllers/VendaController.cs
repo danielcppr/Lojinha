@@ -90,11 +90,11 @@ namespace Lojinha.API.Controllers
         {
             try
             {
-                return await _vendaServico.AdicionarVenda(vendaModel) ? Ok() : BadRequest("Erro ao cadastrar cliente");
+                return await _vendaServico.AdicionarVenda(vendaModel) ? Ok() : BadRequest("Erro ao cadastrar venda");
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar cadastrar cliente. Erro: {e.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar cadastrar venda. Erro: {e.Message}");
             }
         }
 

@@ -16,7 +16,7 @@ namespace Lojinha.Dominio.Models
         public double ValorTotal { get; set; }
         public string FormaPagamento { get; set; }
 
-        public virtual List<ItemVenda> ItensVenda { get; set; }
+        public virtual List<ItemVenda> ItensVenda { get; set; } 
         
         [ForeignKey("ClienteId")]
         public int ClienteId { get; set; }
@@ -30,22 +30,19 @@ namespace Lojinha.Dominio.Models
         [Required]
         public virtual Funcionario Funcionario { get; set; }
 
-        //public void calculaValorTotal(double _valorTotal = 0)
+        //public static double CalculaValorTotal(List<ItemVenda> itensVenda)
         //{
+        //    double valorTotal = 0;
+        //    ItensVenda.ForEach(i => valorTotal += i.ValorParcial);
 
-        //    try
-        //    {
-        //        //ItensVenda.ForEach(i => _valorTotal += i.Valor);
-            
-        //        ValorTotal = 10;
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        throw new Exception(e.Message);
-        //    }
+        //    return valorTotal;
         //}
 
+        //public void CalculaValorTotal()
+        //{
+        //    ValorTotal = 0;
+        //    ItensVenda.ForEach(i => ValorTotal += i.ValorParcial);
+        //}
 
 
     }
