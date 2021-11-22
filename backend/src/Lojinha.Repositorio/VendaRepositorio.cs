@@ -21,9 +21,11 @@ namespace Lojinha.Repositorio
         public async Task<Venda[]> GetTodasVendas()
         {
             return await _context.Vendas
-                                 .Include(v => v.Cliente)
-                                 .Include(v => v.Funcionario)
+                                 //.Include(v => v.Cliente)
+                                 //.Include(v => v.Funcionario)
                                  .Include(v => v.ItensVenda)
+                                 .ThenInclude(i => i.Produto)
+                                 .AsNoTracking()
                                  .ToArrayAsync();
         }
 
@@ -31,16 +33,20 @@ namespace Lojinha.Repositorio
         {
             return await _context.Vendas
                                  .Include(v => v.ItensVenda)
+                                 .ThenInclude(i => i.Produto)
+                                 .AsNoTracking()
                                  .Where(v => v.VendaId == id)
                                  .FirstOrDefaultAsync();
         }
 
         public async Task<Venda[]> GetVendasPorIdCliente(int id)
         {
-            IQueryable<Venda> query = _context.Vendas.Where(v => v.Cliente.ClienteId == id);
+            IQueryable<Venda> query = _context.Vendas
+                                              .Include(v => v.ItensVenda)
+                                              .ThenInclude(i => i.Produto)
+                                              .AsNoTracking();
 
-            return await query.Include(v => v.ItensVenda).ThenInclude(i => i.Produto)
-                                 .ToArrayAsync();
+            return await query.ToArrayAsync();
 
         }
 

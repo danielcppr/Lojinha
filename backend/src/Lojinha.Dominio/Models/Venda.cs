@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lojinha.Dominio.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +14,18 @@ namespace Lojinha.Dominio.Models
         double _valorTotal = 0;
         public int VendaId { get; set; }
 
-        public double ValorTotal { get; set; }
+        [NotMapped]
+        public double ValorTotal
+        {
+            get
+            {
+                double valor = 0;
+                ItensVenda.ForEach(i => valor += i.ValorParcial);
+                return valor;
+            }
+            set { }
+        }
+
         public string FormaPagamento { get; set; }
 
         public virtual List<ItemVenda> ItensVenda { get; set; } 

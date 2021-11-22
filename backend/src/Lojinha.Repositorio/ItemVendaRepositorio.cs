@@ -20,17 +20,24 @@ namespace Lojinha.Repositorio
 
         public async Task<ItemVenda> GetItemVenda(int itemVendaId)
         {
-            return await _context.ItensVendas.FindAsync(itemVendaId);
+            return await _context.ItensVendas.Include(i => i.Produto)
+                                             .AsNoTracking()
+                                             .FirstOrDefaultAsync(i => i.ItemVendaId.Equals(itemVendaId));
         }
 
         public async Task<ItemVenda[]> GetItensVendaPorVendaId(int vendaId)
         {
-            return await _context.ItensVendas.Where(i => i.Venda.VendaId == vendaId).ToArrayAsync();
+            return await _context.ItensVendas.Include(i => i.Produto)
+                                             .AsNoTracking()
+                                             .Where(i => i.Venda.VendaId == vendaId)
+                                             .ToArrayAsync();
         }
 
         public async Task<ItemVenda[]> GetTodosItensVendaAsync()
         {
-            return await _context.ItensVendas.ToArrayAsync();
+            return await _context.ItensVendas.Include(i => i.Produto)
+                                             .AsNoTracking()
+                                             .ToArrayAsync();
         }
 
     }

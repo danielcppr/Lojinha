@@ -87,18 +87,16 @@ namespace Lojinha.Servico
 
                 if (await _genericoRepo.SaveChangesAsync())
                 {
-                    var venda = await _vendaServico.GetVendaPorId(itemVendaMapped.VendaId);
-                    var vendaMapped = _mapper.Map<Venda>(venda);
+                    return true;
+                    //var venda = await _vendaServico.GetVendaPorId(itemVendaMapped.VendaId);
+                    //var vendaMapped = _mapper.Map<Venda>(venda);
 
-                    double valorTotal = CalculoVendaService.CalculaValorTotal(vendaMapped);
+                    //double valorTotal = CalculoVendaService.CalculaValorTotal(vendaMapped);
                     
-                    venda.ValorTotal = valorTotal;
-
-                    
-                    return await _vendaServico.AtualizaVenda(venda.VendaId, venda) ? true : false;
+                    //venda.ValorTotal = valorTotal;
 
                     
-
+                   // return await _vendaServico.AtualizaVenda(venda.VendaId, venda) ? true : false;                   
                 }
                 else
                 {

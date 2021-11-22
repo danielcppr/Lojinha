@@ -14,15 +14,15 @@ namespace Lojinha.Dominio.Models
         public int ItemVendaId { get; set; }
         public int Quantidade { get; set; }
 
-        public double ValorParcial { get; set; }
-
-
+        double _value = 0;
         public int ProdutoCodigo { get; set; }
 
-        [Required]
-        [JsonInclude]
         [ForeignKey("ProdutoCodigo")]
+        [Required, JsonIgnore]
         public Produto Produto { get; set; }
+
+        [NotMapped]
+        public double ValorParcial { get => Quantidade * Produto.Valor; set { } }
 
         [ForeignKey("VendaId")]
         public int VendaId { get; set; }

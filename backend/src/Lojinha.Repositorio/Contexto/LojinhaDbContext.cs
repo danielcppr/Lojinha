@@ -36,6 +36,7 @@ namespace Lojinha.Repositorio.Contexto
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
 
+
             //mb.Entity<ItemVenda>()
             //    .HasOne(i => i.Venda)
             //    .WithMany()
