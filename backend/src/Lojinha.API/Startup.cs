@@ -50,6 +50,8 @@ namespace Lojinha.API
             services.AddTransient<IVendaRepositorio, VendaRepositorio>();
             services.AddTransient<IItemVendaRepositorio, ItemVendaRepositorio>();
             services.AddTransient<IItemVendaServico, ItemVendaServico>();
+            services.AddTransient<IFuncionarioRepositorio, FuncionarioRepositorio>();
+            services.AddTransient<IFuncionarioServico, FuncionarioServico>();
 
             services.AddScoped<IClienteServico, ClienteServico>();
  

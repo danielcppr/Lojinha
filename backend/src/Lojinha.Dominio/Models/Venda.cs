@@ -13,6 +13,7 @@ namespace Lojinha.Dominio.Models
     {
         double _valorTotal = 0;
         public int VendaId { get; set; }
+        public virtual List<ItemVenda> ItensVenda { get; set; } 
 
         [NotMapped]
         public double ValorTotal
@@ -28,7 +29,6 @@ namespace Lojinha.Dominio.Models
 
         public string FormaPagamento { get; set; }
 
-        public virtual List<ItemVenda> ItensVenda { get; set; } 
         
         [ForeignKey("ClienteId")]
         public int ClienteId { get; set; }

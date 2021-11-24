@@ -52,7 +52,10 @@ namespace Lojinha.Repositorio
 
         public async Task<Venda[]> GetVendasPorMatriculaFuncionario(int matricula)
         {
-            IQueryable<Venda> query = _context.Vendas.Where(v => v.Funcionario.Matricula == matricula);
+            IQueryable<Venda> query = _context.Vendas.Include(v => v.ItensVenda)
+                                                     .ThenInclude(i => i.Produto)
+                                                     .AsNoTracking()
+                                                     .Where(v => v.Funcionario.Matricula == matricula);
 
             return await query.ToArrayAsync();
         }

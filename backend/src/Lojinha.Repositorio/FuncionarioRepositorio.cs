@@ -25,7 +25,11 @@ namespace Lojinha.Repositorio
 
         public async Task<Funcionario> GetFuncionarioPorMatriculaAsync(int id)
         {
-            return await _context.Funcionarios.FindAsync(id);
+            return await _context.Funcionarios.Include(f => f.Vendas)
+                                              .ThenInclude(v => v.ItensVenda)
+                                              .ThenInclude(i => i.Produto)
+                                              .AsNoTracking()
+                                              .FirstOrDefaultAsync(i => i.Matricula == id);
         }
 
         public Task<Funcionario[]> GetFuncionariosPorNomeAsync(string nome)
@@ -35,7 +39,7 @@ namespace Lojinha.Repositorio
 
         public async Task<Funcionario[]> GetTodosFuncionariosAsync()
         {
-            return await _context.Funcionarios.ToArrayAsync();
+            return await _context.Funcionarios.Include(f => f.Vendas).ThenInclude(v => v.ItensVenda).ThenInclude(i => i.Produto).AsNoTracking().ToArrayAsync();
         }
     }
 }

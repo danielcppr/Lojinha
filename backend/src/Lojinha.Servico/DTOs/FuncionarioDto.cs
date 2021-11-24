@@ -14,6 +14,9 @@ namespace Lojinha.Servico.DTOs
         public string Telefone { get; set; }
         public string Cpf { get; set; }
         public double SalarioBase { get; set; }
-        public virtual IEnumerable<VendaDto> Vendas { get; set; }
+        //public virtual List<VendaDto> Vendas { get; set; }
+        public double TotalEmVendas { get; set; }
+        public double SalarioTotal { get; set; }
+        public int PercentualComissao { get; set; }
     }
 }
