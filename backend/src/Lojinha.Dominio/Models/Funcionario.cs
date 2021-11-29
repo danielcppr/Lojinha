@@ -52,7 +52,7 @@ namespace Lojinha.Dominio.Models
 
                 double vendasTotal = query.Sum();
 
-                return (vendasTotal < 10000) ? SalarioBase + vendasTotal * 1.005 : SalarioBase + vendasTotal * 1.007;
+                return (vendasTotal < 10000) ? SalarioBase + vendasTotal * 0.05 : SalarioBase + vendasTotal * 0.07;
             }
             private set { }
         }
