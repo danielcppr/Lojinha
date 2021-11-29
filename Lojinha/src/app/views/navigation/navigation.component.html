@@ -20,6 +20,13 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Lojinha</span>
+      <span class="spacer"></span>
+      <button routerLink="/cadastro-venda" class="nova-venda-btn" mat-raised-button (click)='true'>
+        <div fxLayoutAlign="center center">
+          <mat-icon>add_shopping_cart</mat-icon>
+          <span>Nova Venda</span>
+        </div>
+        </button>
     </mat-toolbar>
     <div class="content">
       <router-outlet></router-outlet>

@@ -27,6 +27,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatDividerModule} from '@angular/material/divider';
 import { FormEdicaoClienteComponent } from './views/form-edicao-cliente/form-edicao-cliente.component';
 import { ConfirmacaoDialogComponent } from './views/confirmacao-dialog/confirmacao-dialog.component';
+import { CadastroVendasComponent } from './views/cadastro-vendas/cadastro-vendas.component';
 
 
 
@@ -38,7 +39,8 @@ import { ConfirmacaoDialogComponent } from './views/confirmacao-dialog/confirmac
     HomeComponent,
     FormCadastroClientesComponent,
     FormEdicaoClienteComponent,
-    ConfirmacaoDialogComponent
+    ConfirmacaoDialogComponent,
+    CadastroVendasComponent
   ],
   imports: [
     HttpClientModule,
