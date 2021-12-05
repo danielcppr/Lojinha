@@ -14,7 +14,6 @@ namespace Lojinha.Dominio.Models
         public int ItemVendaId { get; set; }
         public int Quantidade { get; set; }
 
-        double _value = 0;
         public int ProdutoCodigo { get; set; }
 
         [ForeignKey("ProdutoCodigo")]

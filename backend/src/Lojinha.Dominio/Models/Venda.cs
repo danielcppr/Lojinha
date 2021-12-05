@@ -42,19 +42,9 @@ namespace Lojinha.Dominio.Models
         [Required]
         public virtual Funcionario Funcionario { get; set; }
 
-        //public static double CalculaValorTotal(List<ItemVenda> itensVenda)
-        //{
-        //    double valorTotal = 0;
-        //    ItensVenda.ForEach(i => valorTotal += i.ValorParcial);
+        [Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime Data { get; set; }
 
-        //    return valorTotal;
-        //}
-
-        //public void CalculaValorTotal()
-        //{
-        //    ValorTotal = 0;
-        //    ItensVenda.ForEach(i => ValorTotal += i.ValorParcial);
-        //}
 
 
     }

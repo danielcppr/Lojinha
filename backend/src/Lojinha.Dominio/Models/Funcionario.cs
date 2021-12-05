@@ -12,14 +12,8 @@ namespace Lojinha.Dominio.Models
 {
     public class Funcionario
     {
-        // Já com relação ao funcionário, é preciso conhecer sua
-        // matrícula, nome, endereço, telefone, cpf e salário base.
-        // O cálculo do salário do funcionário está relacionado a
-        // uma comissão que feita sobre o volume total de vendas no mês.
-        // O percentual a ser aplicado é de 5% para volume de vendas
-        // inferior o R$ 10 mil reais e 7% para valor maior ou igual a R$ 10 mil reais.
-
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Matricula { get; set; }
         public string Nome { get; set; }
         public string Endereco { get; set; }
@@ -65,7 +59,13 @@ namespace Lojinha.Dominio.Models
                 var vendas = (from v in Vendas
                               select v.ValorTotal);
 
-                int comissaoPercentual = (vendas.Sum() < 10000) ? 5 : 7;
+
+                int comissaoPercentual = 0;
+                if (vendas.Sum() > 0)
+                {
+                    comissaoPercentual = (vendas.Sum() < 10000) ? 5 : 7;
+                }
+                
 
                 return comissaoPercentual;
             }
