@@ -18,26 +18,28 @@ namespace Lojinha.Servico
         private readonly IClienteRepositorio _clienteRepositorio;
         private readonly IMapper _mapper;
 
-        public ClienteServico(ICrudGenericoRepositorio  crudGenerioRepositorio, IClienteRepositorio clienteRepositorio, IMapper mapper)
+        public ClienteServico(ICrudGenericoRepositorio crudGenerioRepositorio, IClienteRepositorio clienteRepositorio, IMapper mapper)
         {
             _crudGenericoRepositorio = crudGenerioRepositorio;
             _clienteRepositorio = clienteRepositorio;
             _mapper = mapper;
         }
 
+
         public async Task<bool> AddCliente(ClienteDto cliente)
         {
-            try           
+            try
             {
                 var clienteMapped = _mapper.Map<Cliente>(cliente);
 
                 _crudGenericoRepositorio.Add(clienteMapped);
+
                 return await _crudGenericoRepositorio.SaveChangesAsync() ? true : throw new Exception("Houve algum erro ao cadastrar novo Cliente.");
-    
-            } 
-            catch (Exception e) 
-            { 
-                throw new Exception(e.Message);  
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
@@ -104,14 +106,14 @@ namespace Lojinha.Servico
                     var clienteId = cliente.ClienteId;
                     var clienteMapped = _mapper.Map(clienteNovo, cliente);
 
-                    clienteMapped.ClienteId = clienteId; 
+                    clienteMapped.ClienteId = clienteId;
                     clienteMapped.Cpf = cpf;
                     //clienteMapped.Nome = clienteNovo.Nome;
                     //clienteMapped.Endereco = clienteNovo.Endereco;
                     //clienteMapped.Telefone = clienteNovo.Telefone;
-                    
+
                     _crudGenericoRepositorio.Update(clienteMapped);
-                    
+
                     if (await _crudGenericoRepositorio.SaveChangesAsync())
                     {
                         return true;
@@ -139,16 +141,17 @@ namespace Lojinha.Servico
                     throw new Exception("Erro ao excluir. Cliente não encontrado.");
                 }
 
-                var clienteMapped = _mapper.Map<Cliente>(cliente);
-                _crudGenericoRepositorio.Remove(clienteMapped);
+                _crudGenericoRepositorio.Remove(cliente);
 
                 return await _crudGenericoRepositorio.SaveChangesAsync();
-            
-            } catch(Exception e) 
-            { 
-                throw new Exception(e.Message); 
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
+
 
     }
 }

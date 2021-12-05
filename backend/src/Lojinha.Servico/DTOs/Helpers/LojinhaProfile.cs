@@ -13,6 +13,10 @@ namespace Lojinha.Servico.DTOs.Helpers
         public LojinhaProfile()
         {
             CreateMap<Cliente, ClienteDto>().ReverseMap();
+            CreateMap<Produto, ProdutoDto>().ReverseMap();
+            CreateMap<Venda, VendaDto>().ReverseMap();
+            CreateMap<ItemVenda, ItemVendaDto>().ReverseMap();
+            CreateMap<Funcionario, FuncionarioDto>().ReverseMap();
         }
     }
 }

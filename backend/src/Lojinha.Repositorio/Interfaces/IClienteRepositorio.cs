@@ -11,7 +11,7 @@ namespace Lojinha.Repositorio.Interfaces
     public interface IClienteRepositorio
     {
         public Task<Cliente[]> GetTodosClientesAsync();
-        public Task<Cliente[]> GetClientesPorNome(string nome);
+        public Task<Cliente[]> GetClientesPorNomeAsync(string nome);
         public Task<Cliente> GetClientePorIdAsync(int id);
         public Task<Cliente> GetClientePorCpfAsync(string cpf);
 

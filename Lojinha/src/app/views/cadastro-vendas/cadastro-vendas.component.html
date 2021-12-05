@@ -1,0 +1,78 @@
+<h2>Nova Venda</h2>
+
+<!-- Form -->
+
+<form [formGroup]="novaVendaForm">
+  <div fxLayout='row wrap' fxLayoutAlign='space-evenly'>
+    <mat-form-field fxFlex="0 1 calc(35%)"
+    fxFlex.lt-md="0 1 calc(100%)"
+    fxFlex.lt-sm="100%" appearance="standard">
+      <mat-label>Cliente</mat-label>
+      <mat-select formControlName="cliente" name="cliente">
+        <mat-option *ngFor="let cliente of clientes" value="1">{{cliente.nome}} | CPF: {{cliente.cpf}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="0 1 calc(35%)"
+    fxFlex.lt-md="0 1 calc(45%)"
+    fxFlex.lt-sm="100%" appearance="standard">
+      <mat-label>Vendedor</mat-label>
+      <mat-select formControlName="vendedor" name="vendedor">
+        <mat-option *ngFor="let vendedor of vendedores" value="2">{{vendedor.nome}} | Matricula: {{vendedor.matricula}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="0 1 calc(35%)"
+    fxFlex.lt-md="0 1 calc(45%)"
+    fxFlex.lt-sm="100%" appearance="standard">
+      <mat-label>Produto</mat-label>
+      <mat-select formControlName="produto" name="produto">
+        <mat-option *ngFor="let produto of produtos" value="3">{{produto.descricao}} | Codigo: {{produto.codigo}} | Valor Unitario: R${{produto.valor}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="0 1 calc(35%)"
+    fxFlex.lt-md="0 1 calc(45%)"
+    fxFlex.lt-sm="100%" appearance="standard">
+      <mat-label>Quantidade</mat-label>
+      <input matInput formControlName="quantidade" name="quantidade">
+    </mat-form-field>
+  </div>
+</form>
+<div fxLayout='column' fxLayoutAlign='center'>
+  <button class="salvar-btn" mat-button type="submit" (click)="true" cdkFocusInitial>Adicionar Item</button>
+</div>
+
+
+<!-- Tabela -->
+
+
+<div class="mat-elevation-z8">
+  <table [dataSource]="itens" mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef>Codigo</th>
+      <td mat-cell *matCellDef="let item">{{item.produtoCodigo}}</td>
+    </ng-container>
+
+    <!-- Nome Column -->
+    <ng-container matColumnDef="descricao">
+      <th mat-header-cell *matHeaderCellDef>Descricao</th>
+      <td mat-cell *matCellDef="let item">{{item.produto.descricao}}</td>
+    </ng-container>
+
+    <!-- Cpf Column -->
+    <ng-container matColumnDef="valor-unitario">
+      <th mat-header-cell *matHeaderCellDef>Valor Unitario</th>
+      <td mat-cell *matCellDef="let item">{{item.produto.valor}}</td>
+    </ng-container>
+
+    <!-- Endereco Column -->
+    <ng-container matColumnDef="quantidade">
+      <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+      <td mat-cell *matCellDef="let item">{{item.quantidade}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let itens; columns: displayedColumns;"></tr>
+  </table>
+
+</div>
+

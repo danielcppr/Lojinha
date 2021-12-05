@@ -41,11 +41,20 @@ namespace Lojinha.API
             });
             services.AddDbContext<LojinhaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<ICrudGenericoRepositorio, CrudGenericoRepositorio>();
             services.AddTransient<IClienteServico, ClienteServico>();
             services.AddTransient<IClienteRepositorio, ClienteRepositorio>();
-            services.AddTransient<ICrudGenericoRepositorio, CrudGenericoRepositorio>();
+            services.AddTransient<IProdutoServico, ProdutoServico>();
+            services.AddTransient<IProdutoRepositorio, ProdutoRepositorio>();
+            services.AddTransient<IVendaServico, VendaServico>();
+            services.AddTransient<IVendaRepositorio, VendaRepositorio>();
+            services.AddTransient<IItemVendaRepositorio, ItemVendaRepositorio>();
+            services.AddTransient<IItemVendaServico, ItemVendaServico>();
+            services.AddTransient<IFuncionarioRepositorio, FuncionarioRepositorio>();
+            services.AddTransient<IFuncionarioServico, FuncionarioServico>();
 
             services.AddScoped<IClienteServico, ClienteServico>();
+ 
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

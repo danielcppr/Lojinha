@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Lojinha.Dominio.Models
@@ -11,12 +13,23 @@ namespace Lojinha.Dominio.Models
     {
         public int ItemVendaId { get; set; }
         public int Quantidade { get; set; }
-        public double Valor { get; set; }
 
-        [Required]
+        public int ProdutoCodigo { get; set; }
+
+        [ForeignKey("ProdutoCodigo")]
+        [Required, JsonIgnore]
         public Produto Produto { get; set; }
 
+        [NotMapped]
+        public double ValorParcial { get => Quantidade * Produto.Valor; set { } }
+
+        [ForeignKey("VendaId")]
+        public int VendaId { get; set; }
         [Required]
-        public Venda Venda { get; set; }
-    }
+        [JsonIgnore]
+        public virtual Venda Venda { get; set; }
+
+
+    }   
+
 }
